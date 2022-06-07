@@ -21,6 +21,42 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: grades; Type: TABLE; Schema: public; Owner: nicole
+--
+
+CREATE TABLE public.grades (
+    id integer NOT NULL,
+    student_github character varying(30),
+    project_title character varying(30),
+    grade integer
+);
+
+
+ALTER TABLE public.grades OWNER TO nicole;
+
+--
+-- Name: grades_id_seq; Type: SEQUENCE; Schema: public; Owner: nicole
+--
+
+CREATE SEQUENCE public.grades_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.grades_id_seq OWNER TO nicole;
+
+--
+-- Name: grades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nicole
+--
+
+ALTER SEQUENCE public.grades_id_seq OWNED BY public.grades.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: nicole
 --
 
@@ -93,6 +129,13 @@ ALTER SEQUENCE public.students_id_seq OWNED BY public.students.id;
 
 
 --
+-- Name: grades id; Type: DEFAULT; Schema: public; Owner: nicole
+--
+
+ALTER TABLE ONLY public.grades ALTER COLUMN id SET DEFAULT nextval('public.grades_id_seq'::regclass);
+
+
+--
 -- Name: projects id; Type: DEFAULT; Schema: public; Owner: nicole
 --
 
@@ -104,6 +147,20 @@ ALTER TABLE ONLY public.projects ALTER COLUMN id SET DEFAULT nextval('public.pro
 --
 
 ALTER TABLE ONLY public.students ALTER COLUMN id SET DEFAULT nextval('public.students_id_seq'::regclass);
+
+
+--
+-- Data for Name: grades; Type: TABLE DATA; Schema: public; Owner: nicole
+--
+
+COPY public.grades (id, student_github, project_title, grade) FROM stdin;
+1	jhacks	Markov	10
+2	jhacks	Blocky	2
+3	sdevelops	Markov	50
+4	sdevelops	Blocky	100
+5	jhacks	Clearly	90
+6	sdevelops	Clearly	45
+\.
 
 
 --
@@ -129,6 +186,13 @@ COPY public.students (id, first_name, last_name, github) FROM stdin;
 
 
 --
+-- Name: grades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nicole
+--
+
+SELECT pg_catalog.setval('public.grades_id_seq', 6, true);
+
+
+--
 -- Name: projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nicole
 --
 
@@ -140,6 +204,14 @@ SELECT pg_catalog.setval('public.projects_id_seq', 4, true);
 --
 
 SELECT pg_catalog.setval('public.students_id_seq', 2, true);
+
+
+--
+-- Name: grades grades_pkey; Type: CONSTRAINT; Schema: public; Owner: nicole
+--
+
+ALTER TABLE ONLY public.grades
+    ADD CONSTRAINT grades_pkey PRIMARY KEY (id);
 
 
 --
