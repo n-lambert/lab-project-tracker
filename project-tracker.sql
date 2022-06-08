@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: grades; Type: TABLE; Schema: public; Owner: nicole
+-- Name: grades; Type: TABLE; Schema: public; 
 --
 
 CREATE TABLE public.grades (
